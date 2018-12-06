@@ -2,7 +2,7 @@
   <div class="app-header">
     <div class="header-left app-center" @click="$router.push('/')">
       <img src="/static/logo.png">
-      <div>{{name}}</div>
+      <div>\{{$t('systemName')}}</div>
     </div>
 
     <div class="header-menu">
@@ -19,7 +19,7 @@
       <Menu mode="horizontal" theme="dark" active-name="1" @on-select="onMenuChanged">
         <Submenu name="3">
           <template slot="title">
-            <Avatar class="avatar">{{personName.split('')[0]}}</Avatar>&nbsp;&nbsp;
+            <Avatar class="avatar">\{{personName.split('')[0]}}</Avatar>&nbsp;&nbsp;
           </template>
           <MenuGroup title="使用">
             <MenuItem name="use">个人中心</MenuItem>
