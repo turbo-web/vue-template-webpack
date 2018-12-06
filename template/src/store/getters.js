@@ -3,6 +3,6 @@ const getters = {
   user: state => state.app.user,
   appMenus: state => state.app.appMenus,
   authMenus: state => state.app.authMenus,
-  isAdmin: state => state.app.isAdmin,
-};
+  isAdmin: state => state.app.isAdmin
+}
 export default getters

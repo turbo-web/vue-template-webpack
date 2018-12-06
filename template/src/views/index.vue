@@ -9,7 +9,7 @@
                 leave-active-class="animated fadeOutRight">
       <slide-panel v-if="showType === 'msg'" @hide-panel="showType = ''"
                    title="消息中心">
-        <message-slide-panel slot="content"></message-slide-panel>           
+        <message-slide-panel slot="content"></message-slide-panel>
       </slide-panel>
       <slide-panel v-else-if="showType === 'history'" @hide-panel="showType = ''"
                    title="最近操作">
@@ -17,7 +17,7 @@
       </slide-panel>
       <slide-panel v-else-if="showType === 'help'" @hide-panel="showType = ''"
                    title="帮助中心">
-        <help-slide-panel slot="content"></help-slide-panel>             
+        <help-slide-panel slot="content"></help-slide-panel>
       </slide-panel>
     </transition>
   </div>
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     onShowPanel(v) {
-      this.showType = this.showType == v ? '' : v
+      this.showType = this.showType === v ? '' : v
     }
   }
 }

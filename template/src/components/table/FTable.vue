@@ -5,7 +5,7 @@
            @on-row-dblclick="onRowDbClick"
            :highlight-row="highlightRow"/>
     <div class="hyz-page">
-      <Page :total="total" :current="page" :page-size="pageSize" 
+      <Page :total="total" :current="page" :page-size="pageSize"
             show-sizer show-elevator show-total placement="top"
             @on-change="changePage"
             @on-page-size-change="pageSizeChange"	/>
@@ -23,7 +23,7 @@
     },
     computed: {
       data() {
-        let {page, pageSize, dataSource} = this
+        let {pageSize, dataSource} = this
         if ((this.page - 1) * pageSize >= dataSource.length) {
           this.page = Math.max(1, this.page - 1)
         }
@@ -40,7 +40,7 @@
       },
       tableHeight() {
         if(this.height) return this.height
-        
+
         if(this.data.length >= 10) {
           return window.innerHeight < 750 ? 450 : 521
         } else {

@@ -2,7 +2,7 @@
   <div class="app-header">
     <div class="header-left app-center" @click="$router.push('/')">
       <img src="/static/logo.png">
-      <div>\{{$t('systemName')}}</div>
+      <div>\{{$t('projectName')}}</div>
     </div>
 
     <div class="header-menu">
@@ -155,7 +155,7 @@
     color: #ddd;
     padding: 10px 14px;
     border-left: 1px solid #000;
-    // background-color: aquamarine; 
+    // background-color: aquamarine;
   }
 
   .avatar {

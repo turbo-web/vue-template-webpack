@@ -4,24 +4,24 @@
 import axios from 'axios'
 import {REST_API} from '../config'
 import {Message} from 'iview'
-import store from '../store';
+import store from '../store'
 
 axios.defaults.timeout = 10000
 axios.defaults.baseURL = REST_API
-axios.defaults.showSpin = true  //请求加载loading效果
-axios.defaults.showMsg = false  //请求后是否弹出消息
+axios.defaults.showSpin = true // 请求加载loading效果
+axios.defaults.showMsg = false // 请求后是否弹出消息
 
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
-  config.headers['Authorization'] = 'Bearer '+store.getters.token
-  if(config.showSpin) {
+  config.headers['Authorization'] = 'Bearer ' + store.getters.token
+  if (config.showSpin) {
     document.querySelector('#global-spin').style.display = 'block'
   }
-  return config;
+  return config
 }, function (error) {
   console.log('>>> 发送失败。', error)
   document.querySelector('#global-spin').style.display = 'none'
-  return Promise.reject(error);
+  return Promise.reject(error)
 })
 
 // Add a response interceptor
@@ -32,7 +32,7 @@ axios.interceptors.response.use(function (response) {
   check(error.response)
   console.log('>>> 返回失败。', error.response)
   document.querySelector('#global-spin').style.display = 'none'
-  return Promise.reject(error);
+  return Promise.reject(error)
 })
 
 /**
@@ -47,21 +47,21 @@ function check (response) {
   }
 
   if (response.status >= 200 && response.status < 300) {
-    if(response.data && response.data.hasOwnProperty('hyz_code')) { //简单判断结果是否来自约定的后台服务
-      const {hyz_code, hyz_message, hyz_result} = response.data
-      if (hyz_code === 20000) {
-        if(response.config.showMsg) {
-          Message.success(hyz_message)
+    if (response.data && response.data.hasOwnProperty('hyz_code')) { // 简单判断结果是否来自约定的后台服务
+      const {hyz_code: hyzCode, hyz_message: hyzMessage, hyz_result: hyzResult} = response.data
+      if (hyzCode === 20000) {
+        if (response.config.showMsg) {
+          Message.success(hyzMessage)
         }
-        return hyz_result
-      } else if (hyz_code === 50200) {
-        Message.error(hyz_message)
-        return hyz_result
+        return hyzResult
+      } else if (hyzCode === 50200) {
+        Message.error(hyzMessage)
+        return hyzResult
       } else {
-        if(response.config.showMsg) {
-          Message.error(hyz_message)
+        if (response.config.showMsg) {
+          Message.error(hyzMessage)
         }
-        throw new Error(hyz_message)
+        throw new Error(hyzMessage)
       }
     } else {
       return response.data
@@ -75,11 +75,11 @@ function check (response) {
     msg = '403, 服务器拒绝本次访问, 操作失败'
   } else if (response.status === 400) {
     msg = '400, 本次请求无效, 操作失败'
-  } else if (response.status === 401) { //没权限的话跳回登录界面
+  } else if (response.status === 401) { // 没权限的话跳回登录界面
     msg = '未授权或授权过期，请重新登录！'
-    console.log('木有权限啊');
-    if(response.config.showMsg) {
-     Message.error(msg)
+    console.log('木有权限啊')
+    if (response.config.showMsg) {
+      Message.error(msg)
     }
     return
   } else if (response.status === 405) {
@@ -89,7 +89,7 @@ function check (response) {
   } else {
     msg = '错误代码:' + response.status
   }
-  if(response.config.showMsg) {
+  if (response.config.showMsg) {
     Message.error(msg)
   }
 }

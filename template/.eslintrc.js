@@ -5,6 +5,10 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint'
   },
+  globals: {
+    anime: true,
+    _: true,
+  },
   env: {
     browser: true,
   },
@@ -12,7 +16,7 @@ module.exports = {
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential', 
+    'plugin:vue/essential',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
     'standard'
   ],
@@ -43,6 +47,8 @@ module.exports = {
   {{/if_eq}}
   // add your custom rules here
   rules: {
+    'vue/no-parsing-error': [2, { 'x-invalid-end-tag': false }],
+      'vue/no-side-effects-in-computed-properties': 'off',
     {{#if_eq lintConfig "standard"}}
     // allow async-await
     'generator-star-spacing': 'off',

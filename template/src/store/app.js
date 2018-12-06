@@ -1,4 +1,4 @@
-import jsSHA from 'jssha';
+import JsSHA from 'jssha'
 import router from '../router'
 import axios from '../utils/http'
 import qs from 'qs'
@@ -14,22 +14,40 @@ const app = {
     user: Cookie.getJSON('app_user'),
     loginLoading: false,
     loginMsg: '',
-    themeSwitch:true,
+    themeSwitch: true
   },
   mutations: {
-    SET_TOKEN: (state, payload) => state.token = payload,
-    SET_USER: (state, payload) => state.user = payload,
-    SET_APP_MENUS: (state, payload) => state.appMenus = payload,
-    SET_AUTH_MENUS: (state, payload) => state.authMenus = payload,
-    SET_LOGIN_LOADING: (state, payload) => state.loginLoading = payload,
-    SET_LOGIN_MSG: (state, payload) => state.loginMsg = payload,
-    REMOVE_MSG: (state, payload) => state.loginMsg = payload,
-    SET_THEME: (state, payload) =>state.themeSwitch = payload,
-    SET_IS_ADMIN: (state, payload) =>state.isAdmin = payload,
+    SET_TOKEN: (state, payload) => {
+      state.token = payload
+    },
+    SET_USER: (state, payload) => {
+      state.user = payload
+    },
+    SET_APP_MENUS: (state, payload) => {
+      state.appMenus = payload
+    },
+    SET_AUTH_MENUS: (state, payload) => {
+      state.authMenus = payload
+    },
+    SET_LOGIN_LOADING: (state, payload) => {
+      state.loginLoading = payload
+    },
+    SET_LOGIN_MSG: (state, payload) => {
+      state.loginMsg = payload
+    },
+    REMOVE_MSG: (state, payload) => {
+      state.loginMsg = payload
+    },
+    SET_THEME: (state, payload) => {
+      state.themeSwitch = payload
+    },
+    SET_IS_ADMIN: (state, payload) => {
+      state.isAdmin = payload
+    }
   },
   actions: {
-    fetchToken({ commit, dispatch }, payload){
-      const shaObj = new jsSHA('SHA-1', 'TEXT')
+    fetchToken ({commit, dispatch}, payload) {
+      const shaObj = new JsSHA('SHA-1', 'TEXT')
       shaObj.update(payload.password)
       const para = {
         ...payload,
@@ -44,33 +62,33 @@ const app = {
         method: 'post',
         url: API.login.token,
         data: qs.stringify(para),
-        showSpin: false,
+        showSpin: false
       }).then(response => {
-          commit('SET_TOKEN', response.access_token)
-          Cookie.set('app_token', response.access_token)
-          dispatch('fetchAccount')
-          commit('SET_LOGIN_MSG', '')
-        }).catch(err => {
-          commit('SET_LOGIN_LOADING', false)
-          if(err.response) {
-            if (err.response.status === 500) {
-              commit('SET_LOGIN_MSG', '验证服务连接失败！')
-            } else {
-              commit('SET_LOGIN_MSG', '账号和密码不匹配！')
-            }
+        commit('SET_TOKEN', response.access_token)
+        Cookie.set('app_token', response.access_token)
+        dispatch('fetchAccount')
+        commit('SET_LOGIN_MSG', '')
+      }).catch(err => {
+        commit('SET_LOGIN_LOADING', false)
+        if (err.response) {
+          if (err.response.status === 500) {
+            commit('SET_LOGIN_MSG', '验证服务连接失败！')
           } else {
-            commit('SET_LOGIN_MSG', '验证失败！')
+            commit('SET_LOGIN_MSG', '账号和密码不匹配！')
           }
+        } else {
+          commit('SET_LOGIN_MSG', '验证失败！')
+        }
       })
     },
 
-    fetchAccount({commit, state}) {
+    fetchAccount ({commit, state}) {
       commit('SET_LOGIN_LOADING', true)
       return new Promise((resolve, reject) => {
         axios({
           method: 'get',
           url: API.login.account,
-          showSpin: false,
+          showSpin: false
         }).then(response => {
           commit('SET_LOGIN_LOADING', false)
           commit('SET_USER', response)
@@ -80,7 +98,7 @@ const app = {
           const isAdmin = response.userName === 'admin' ? 1 : 0
           commit('SET_IS_ADMIN', isAdmin)
           Cookie.set('app_isAdmin', isAdmin)
-          if(router.currentRoute.path === '/login') {
+          if (router.currentRoute.path === '/login') {
             router.push('/')
           }
           resolve(response)
@@ -93,17 +111,17 @@ const app = {
       })
     },
 
-    logout({commit, state}) {
+    logout ({commit, state}) {
       Cookie.remove('app_token')
       Cookie.remove('app_isAdmin')
       Cookie.remove('auth_menus')
       Cookie.remove('app_user')
       router.push('/login')
     },
-    removeMsg({ commit }, payload){
+    removeMsg ({commit}, payload) {
       commit('REMOVE_MSG', payload)
-    },
+    }
   }
-};
+}
 
-export default app;
+export default app

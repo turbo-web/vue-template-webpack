@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
       if(to.path === '/login') {
         next('/')
       } else {
-        if(isAdmin == 1 || authMenus.indexOf(to.name) > -1) {
+        if(isAdmin === 1 || authMenus.indexOf(to.name) > -1) {
           next()
         } else { //没权限，禁止访问
           next('/403')
