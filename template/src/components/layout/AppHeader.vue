@@ -2,7 +2,7 @@
   <div class="app-header">
     <div class="header-left app-center" @click="$router.push('/')">
       <img src="/static/logo.png">
-      <div>{{$t('projectName')}}</div>
+      <div>{{$t('systemName')}}</div>
     </div>
     
     <div class="header-menu">
@@ -27,14 +27,6 @@
               <MenuGroup title="其它">
                   <MenuItem name="logout">退出</MenuItem>
               </MenuGroup>
-          </Submenu>
-          <Submenu name="4">
-              <template slot="title">
-                  <!-- <Icon type="stats-bars"></Icon> -->
-                  工单
-              </template>
-              <MenuItem name="myOrder">我的工单</MenuItem>
-              <MenuItem name="addOrder">提交工单</MenuItem>
           </Submenu>
       </Menu>
 
