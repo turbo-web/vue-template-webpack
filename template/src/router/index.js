@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {routers, commonRouters, appRouter} from './defines'
+import {routers, appRouter} from './defines'
 import iView from 'iview'
 import store from '../store'
 import Cookie from 'js-cookie'

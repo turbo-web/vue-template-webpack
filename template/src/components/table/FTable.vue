@@ -8,7 +8,7 @@
       <Page :total="total" :current="page" :page-size="pageSize"
             show-sizer show-elevator show-total placement="top"
             @on-change="changePage"
-            @on-page-size-change="pageSizeChange"	/>
+            @on-page-size-change="pageSizeChange"/>
     </div>
   </div>
 </template>

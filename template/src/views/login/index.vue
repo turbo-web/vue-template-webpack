@@ -104,10 +104,10 @@ export default {
       })
     },
     valid(){
-      if (this.formInline.username=="") {
+      if (this.formInline.username==="") {
         this.ruleInline.usernameMsg = "用户名不能为空！"
         return false;
-      }else if (this.formInline.password=="") {
+      }else if (this.formInline.password==="") {
         this.ruleInline.passwordMsg = "密码不能为空！"
         return false;
       }else if (this.formInline.password.length<6&&this.formInline.password.length>0) {
@@ -130,7 +130,7 @@ export default {
     },
     usernameVal() {
       this.$store.dispatch('removeMsg',"")
-      if (this.formInline.username=="") {
+      if (this.formInline.username==="") {
         this.ruleInline.usernameMsg = "用户名不能为空！"
       }else {
         this.ruleInline.usernameMsg = ""
@@ -138,7 +138,7 @@ export default {
     },
     passwordVal() {
       this.$store.dispatch('removeMsg',"");
-      if (this.formInline.password=="") {
+      if (this.formInline.password==="") {
         this.ruleInline.passwordMsg = "密码不能为空！"
       }else if (this.formInline.password.length<6&&this.formInline.password.length>0) {
         this.ruleInline.passwordMsg = "密码长度不能低于6位！"
