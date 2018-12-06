@@ -2,11 +2,11 @@
   <div class="app-header">
     <div class="header-left app-center" @click="$router.push('/')">
       <img src="/static/logo.png">
-      <div>{{$t('systemName')}}</div>
+      <div>{{ $t('systemName') }}</div>
     </div>
-    
+
     <div class="header-menu">
-      <div class="header-menu-item" 
+      <div class="header-menu-item"
            :class="{'header-menu-item-selected': activeMenu === item.name}"
            v-for="item in appMenus" :key="item.name" @click="letsgo(item)"
            v-if="isAdmin || authMenus.indexOf(item.name) > -1">
@@ -16,87 +16,88 @@
     </div>
 
     <div class="header-right app-center">
-       <Menu mode="horizontal" theme="dark" active-name="1" @on-select="onMenuChanged">
-          <Submenu name="3">
-              <template slot="title">
-                  <Avatar class="avatar">{{personName.split('')[0]}}</Avatar>&nbsp;&nbsp;
-              </template>
-              <MenuGroup title="使用">
-                  <MenuItem name="use">个人中心</MenuItem>
-              </MenuGroup>
-              <MenuGroup title="其它">
-                  <MenuItem name="logout">退出</MenuItem>
-              </MenuGroup>
-          </Submenu>
+      <Menu mode="horizontal" theme="dark" active-name="1" @on-select="onMenuChanged">
+        <Submenu name="3">
+          <template slot="title">
+            <Avatar class="avatar">{{personName.split('')[0]}}</Avatar>&nbsp;&nbsp;
+          </template>
+          <MenuGroup title="使用">
+            <MenuItem name="use">个人中心</MenuItem>
+          </MenuGroup>
+          <MenuGroup title="其它">
+            <MenuItem name="logout">退出</MenuItem>
+          </MenuGroup>
+        </Submenu>
       </Menu>
 
       <div class="header-toolbar app-center">
-        <div class="header-icon app-center" 
+        <div class="header-icon app-center"
              :class="{'header-icon-selected': showType === 'msg'}"
              @click="toggleSlidePanel('msg')">
           <Badge count="12">
             <Icon type="ios-bell" size="24"></Icon>
           </Badge>
         </div>
-        <div class="header-icon app-center" 
+        <div class="header-icon app-center"
              :class="{'header-icon-selected': showType === 'history'}"
              @click="toggleSlidePanel('history')">
           <Icon type="android-time" size="22"></Icon>
         </div>
-        <div class="header-icon app-center" 
+        <div class="header-icon app-center"
              :class="{'header-icon-selected': showType === 'help'}"
              @click="toggleSlidePanel('help')">
           <Icon type="help-circled" size="22"></Icon>
         </div>
-        
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  props: ['showType'],
-  computed: {
-    appMenus() {
-      return this.$store.getters.appMenus
-    },
-    authMenus() {
-      return this.$store.getters.authMenus
-    },
-    isAdmin() {
-      return this.$store.getters.isAdmin
-    },
-    personName() {
-      return this.$store.getters.user ? this.$store.getters.user.personName : ''
-    },
-    activeMenu() {
-      return this.$route.path.split('/')[1]
-    }
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout')
-    },
-    toggleSlidePanel(v) {
-      this.$emit('show-panel', v)
-    },
-    letsgo(v) {
-      this.$router.push({name: v.name})
-    },
-    onMenuChanged(v) {
-      if(v === 'logout') {
-        this.$store.dispatch('logout')
-      } else {
-        this.$router.push('/'+v)
+  export default {
+    props: ['showType'],
+    computed: {
+      appMenus() {
+        return this.$store.getters.appMenus
+      },
+      authMenus() {
+        return this.$store.getters.authMenus
+      },
+      isAdmin() {
+        return this.$store.getters.isAdmin
+      },
+      personName() {
+        return this.$store.getters.user ? this.$store.getters.user.personName : ''
+      },
+      activeMenu() {
+        return this.$route.path.split('/')[1]
       }
     },
-  },
-}
+    methods: {
+      logout() {
+        this.$store.dispatch('logout')
+      },
+      toggleSlidePanel(v) {
+        this.$emit('show-panel', v)
+      },
+      letsgo(v) {
+        this.$router.push({name: v.name})
+      },
+      onMenuChanged(v) {
+        if (v === 'logout') {
+          this.$store.dispatch('logout')
+        } else {
+          this.$router.push('/' + v)
+        }
+      },
+    },
+  }
 </script>
 
 <style lang="less">
   @import '~@/styles/theme';
+
   .header-left {
     cursor: pointer;
     img {
@@ -117,8 +118,8 @@ export default {
     font-size: 15px;
     width: 100%;
     // background-color: azure;
-    border-left: 1px solid #000;     
-    border-right: 1px solid #000; 
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
     display: flex;
     align-items: baseline;
     user-select: none;
@@ -126,7 +127,7 @@ export default {
       margin: 0 12px;
       &:hover {
         cursor: pointer;
-        color: fade(@primary-color,90%);
+        color: fade(@primary-color, 90%);
       }
     }
     &-item-selected {
@@ -153,7 +154,7 @@ export default {
     // margin-right: 16px;
     color: #ddd;
     padding: 10px 14px;
-    border-left: 1px solid #000;    
+    border-left: 1px solid #000;
     // background-color: aquamarine; 
   }
 
@@ -168,7 +169,7 @@ export default {
     margin: 0 4px;
     &:hover {
       cursor: pointer;
-      background-color: fade(@primary-color,90%);
+      background-color: fade(@primary-color, 90%);
       border-radius: 30px;
     }
     &-selected {
