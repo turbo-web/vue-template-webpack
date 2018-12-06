@@ -2,7 +2,7 @@
   <div class="app-header">
     <div class="header-left app-center" @click="$router.push('/')">
       <img src="/static/logo.png">
-      <div>{{ $t('systemName') }}</div>
+      <!--<div>{{$t('systemName')}}</div>-->
     </div>
 
     <div class="header-menu">
