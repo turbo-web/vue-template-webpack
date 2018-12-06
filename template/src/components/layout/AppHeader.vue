@@ -11,7 +11,7 @@
            v-for="item in appMenus" :key="item.name" @click="letsgo(item)"
            v-if="isAdmin || authMenus.indexOf(item.name) > -1">
         <Icon :type="item.icon"></Icon>
-        {{ item.label }}
+        \{{ item.label }}
       </div>
     </div>
 
@@ -19,7 +19,7 @@
       <Menu mode="horizontal" theme="dark" active-name="1" @on-select="onMenuChanged">
         <Submenu name="3">
           <template slot="title">
-            <Avatar class="avatar">\{{personName.split('')[0]}}</Avatar>&nbsp;&nbsp;
+            <Avatar class="avatar">\\{{personName.split('')[0]}}</Avatar>&nbsp;&nbsp;
           </template>
           <MenuGroup title="使用">
             <MenuItem name="use">个人中心</MenuItem>
